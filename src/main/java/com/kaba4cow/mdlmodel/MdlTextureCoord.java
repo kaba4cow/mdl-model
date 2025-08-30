@@ -8,13 +8,13 @@ import com.kaba4cow.binprocessor.io.BinaryReader;
  * Represents texture coordinates for a vertex in an {@code MDL} model. Contains S and T coordinates for UV mapping and a seam
  * flag.
  */
-public class MDLTextureCoord {
+public class MdlTextureCoord {
 
 	private final boolean seam;
 	private final int s;
 	private final int t;
 
-	MDLTextureCoord(BinaryReader reader) throws IOException {
+	MdlTextureCoord(BinaryReader reader) throws IOException {
 		this.seam = reader.readInt() != 0;
 		this.s = reader.readInt();
 		this.t = reader.readInt();
@@ -26,7 +26,7 @@ public class MDLTextureCoord {
 	 * @return {@code true} if this coordinate is on a seam, {@code false} otherwise
 	 */
 	public boolean isSeam() {
-		return seam;
+		return this.seam;
 	}
 
 	/**
@@ -35,7 +35,7 @@ public class MDLTextureCoord {
 	 * @return the S coordinate
 	 */
 	public int getS() {
-		return s;
+		return this.s;
 	}
 
 	/**
@@ -44,12 +44,12 @@ public class MDLTextureCoord {
 	 * @return the T coordinate
 	 */
 	public int getT() {
-		return t;
+		return this.t;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("MDLTextureCoord [seam=%s, s=%s, t=%s]", seam, s, t);
+		return String.format("MdlTextureCoord [seam=%s, s=%s, t=%s]", this.seam, this.s, this.t);
 	}
 
 }

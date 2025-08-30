@@ -17,7 +17,7 @@ The library supports files with:
 
 ```java
 try (InputStream input = new FileInputStream("model.mdl")) {
-    MDLModel model = new MDLModel(input);
+    MdlModel model = new MdlModel(input);
     // Work with the model...
 }
 ```
@@ -26,36 +26,40 @@ try (InputStream input = new FileInputStream("model.mdl")) {
 
 ```java
 // Get basic model properties
-MDLVector scale = model.getScale();
-MDLVector translation = model.getTranslation();
+MdlVector scale = model.getScale();
+MdlVector translation = model.getTranslation();
 float boundingRadius = model.getBoundingRadius();
 
 // Access geometry
-MDLTriangle[] triangles = model.getTriangles();
-MDLVertex[] vertices = model.getFrameGroups()[0].getFrames()[0].getVertices();
+MdlTriangle[] triangles = model.getTriangles();
+MdlVertex[] vertices = model.getFrameGroups()[0].getFrames()[0].getVertices();
 
 // Work with textures
-MDLTextureGroup[] textureGroups = model.getTextureGroups();
-MDLTextureCoord[] textureCoords = model.getTextureCoords();
+MdlTextureGroup[] textureGroups = model.getTextureGroups();
+MdlTextureCoord[] textureCoords = model.getTextureCoords();
 
 // Access animations
-MDLFrameGroup[] frameGroups = model.getFrameGroups();
+MdlFrameGroup[] frameGroups = model.getFrameGroups();
 ```
 
 ## Class Overview
 
-- `MDLModel`: root class representing the complete model file
-- `MDLFrame`: single frame of animation with vertex data
-- `MDLFrameGroup`: collection of animation frames with timing
-- `MDLTexture`: individual texture with indexed color data
-- `MDLTextureGroup`: collection of textures with animation timing
-- `MDLTextureCoord`: UV coordinates for texture mapping
-- `MDLTriangle`: three vertex indices forming a triangle face
-- `MDLVertex`: 3D vertex with position and normal index
-- `MDLVector`: 3D vector for transforms and coordinates
-- `MDLNormals`: static collection of predefined normal vectors from **Quake I**
+- `MdlModel`: root class representing the complete model file
+- `MdlFrame`: single frame of animation with vertex data
+- `MdlFrameGroup`: collection of animation frames with timing
+- `MdlTexture`: individual texture with indexed color data
+- `MdlTextureGroup`: collection of textures with animation timing
+- `MdlTextureCoord`: UV coordinates for texture mapping
+- `MdlTriangle`: three vertex indices forming a triangle face
+- `MdlVertex`: 3D vertex with position and normal index
+- `MdlVector`: 3D vector for transforms and coordinates
+- `MdlNormals`: static collection of predefined normal vectors from **Quake I**
 
 ## Error Handling
 
 - `IOException` for I/O errors
 - `IllegalArgumentException` for unsupported file versions or identifiers
+
+## License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.

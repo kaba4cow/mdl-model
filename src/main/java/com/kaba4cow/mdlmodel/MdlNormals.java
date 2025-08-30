@@ -4,7 +4,7 @@ package com.kaba4cow.mdlmodel;
  * Represents a collection of predefined normal vectors used in {@code MDL} models. These normals are stored as 3D vectors with
  * x, y, and z components, normalized to unit length.
  */
-public class MDLNormals {
+public class MdlNormals {
 
 	private static final float[][] NORMALS = { //
 			{ -0.525731f, +0.000000f, +0.850651f }, ////
@@ -171,7 +171,7 @@ public class MDLNormals {
 			{ -0.688191f, -0.587785f, -0.425325f }//
 	};
 
-	private MDLNormals() {}
+	private MdlNormals() {}
 
 	/**
 	 * Returns the complete array of predefined normal vectors.
@@ -203,14 +203,14 @@ public class MDLNormals {
 	}
 
 	/**
-	 * Creates an {@link MDLVector} object from a normal vector at the specified index.
+	 * Creates an {@link MdlVector} object from a normal vector at the specified index.
 	 * 
 	 * @param index the index of the desired normal vector
 	 * 
-	 * @return a new {@link MDLVector} instance representing the normal vector
+	 * @return a new {@link MdlVector} instance representing the normal vector
 	 */
-	public static MDLVector getNormalVector(int index) {
-		return new MDLVector(getNormal(index));
+	public static MdlVector getNormalVector(int index) {
+		return new MdlVector(getNormal(index));
 	}
 
 }

@@ -9,55 +9,55 @@ import com.kaba4cow.binprocessor.io.BinaryReader;
  * Represents a group of animation frames in an {@code MDL} model. A frame group can either be a single frame or multiple frames
  * with associated timing information.
  */
-public class MDLFrameGroup {
+public class MdlFrameGroup {
 
-	private final MDLVertex min;
-	private final MDLVertex max;
-	private final MDLFrame[] frames;
+	private final MdlVertex min;
+	private final MdlVertex max;
+	private final MdlFrame[] frames;
 	private final float[] times;
 
-	MDLFrameGroup(int numVertices, BinaryReader reader) throws IOException {
+	MdlFrameGroup(int numVertices, BinaryReader reader) throws IOException {
 		if (reader.readInt() == 0) {
 			this.min = null;
 			this.max = null;
-			this.frames = new MDLFrame[] { new MDLFrame(numVertices, reader) };
+			this.frames = new MdlFrame[] { new MdlFrame(numVertices, reader) };
 			this.times = new float[] { 0.0f };
 		} else {
 			int numFrames = reader.readInt();
-			this.min = new MDLVertex(reader);
-			this.max = new MDLVertex(reader);
-			this.frames = new MDLFrame[numFrames];
+			this.min = new MdlVertex(reader);
+			this.max = new MdlVertex(reader);
+			this.frames = new MdlFrame[numFrames];
 			this.times = reader.readFloatArray(numFrames);
 			for (int i = 0; i < numFrames; i++)
-				this.frames[i] = new MDLFrame(numVertices, reader);
+				this.frames[i] = new MdlFrame(numVertices, reader);
 		}
 	}
 
 	/**
 	 * Gets the minimum vertex of the frame group's bounding box.
 	 * 
-	 * @return the {@link MDLVertex} representing the minimum bounds, or {@code null} for single-frame groups
+	 * @return the {@link MdlVertex} representing the minimum bounds, or {@code null} for single-frame groups
 	 */
-	public MDLVertex getMin() {
-		return min;
+	public MdlVertex getMin() {
+		return this.min;
 	}
 
 	/**
 	 * Gets the maximum vertex of the frame group's bounding box.
 	 * 
-	 * @return the {@link MDLVertex} representing the maximum bounds, or {@code null} for single-frame groups
+	 * @return the {@link MdlVertex} representing the maximum bounds, or {@code null} for single-frame groups
 	 */
-	public MDLVertex getMax() {
-		return max;
+	public MdlVertex getMax() {
+		return this.max;
 	}
 
 	/**
 	 * Gets the array of frames in this group.
 	 * 
-	 * @return an array of {@link MDLFrame} objects
+	 * @return an array of {@link MdlFrame} objects
 	 */
-	public MDLFrame[] getFrames() {
-		return frames;
+	public MdlFrame[] getFrames() {
+		return this.frames;
 	}
 
 	/**
@@ -66,13 +66,13 @@ public class MDLFrameGroup {
 	 * @return an array of float values representing the time for each frame
 	 */
 	public float[] getTimes() {
-		return times;
+		return this.times;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("MDLFrameGroup [min=%s, max=%s, frames=%s, times=%s]", min, max, Arrays.toString(frames),
-				Arrays.toString(times));
+		return String.format("MdlFrameGroup [min=%s, max=%s, frames=%s, times=%s]", this.min, this.max, Arrays.toString(this.frames),
+				Arrays.toString(this.times));
 	}
 
 }

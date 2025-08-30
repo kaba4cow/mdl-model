@@ -8,14 +8,14 @@ import com.kaba4cow.binprocessor.io.BinaryReader;
  * Represents a vertex in an {@code MDL} model. Each vertex contains integer coordinates and a normal vector index. The
  * coordinates are stored as unsigned bytes (0-255).
  */
-public class MDLVertex {
+public class MdlVertex {
 
 	private final int x;
 	private final int y;
 	private final int z;
 	private final int normal;
 
-	MDLVertex(BinaryReader reader) throws IOException {
+	MdlVertex(BinaryReader reader) throws IOException {
 		this.x = reader.readByte() & 0xFF;
 		this.y = reader.readByte() & 0xFF;
 		this.z = reader.readByte() & 0xFF;
@@ -28,7 +28,7 @@ public class MDLVertex {
 	 * @return the X coordinate as an integer (0-255)
 	 */
 	public int getX() {
-		return x;
+		return this.x;
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class MDLVertex {
 	 * @return the Y coordinate as an integer (0-255)
 	 */
 	public int getY() {
-		return y;
+		return this.y;
 	}
 
 	/**
@@ -46,21 +46,21 @@ public class MDLVertex {
 	 * @return the Z coordinate as an integer (0-255)
 	 */
 	public int getZ() {
-		return z;
+		return this.z;
 	}
 
 	/**
-	 * Gets the index of this vertex's normal vector in the {@link MDLNormals} collection.
+	 * Gets the index of this vertex's normal vector in the {@link MdlNormals} collection.
 	 * 
 	 * @return the normal vector index as an integer (0-255)
 	 */
 	public int getNormal() {
-		return normal;
+		return this.normal;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("MDLVertex [x=%s, y=%s, z=%s, normal=%s]", x, y, z, normal);
+		return String.format("MdlVertex [x=%s, y=%s, z=%s, normal=%s]", this.x, this.y, this.z, this.normal);
 	}
 
 }

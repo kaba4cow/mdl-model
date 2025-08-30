@@ -8,19 +8,19 @@ import com.kaba4cow.binprocessor.io.BinaryReader;
  * Represents a 3D vector in an {@code MDL} model. This class is used for storing coordinates and directions in 3D space using
  * floating-point precision.
  */
-public class MDLVector {
+public class MdlVector {
 
 	private final float x;
 	private final float y;
 	private final float z;
 
-	MDLVector(BinaryReader reader) throws IOException {
+	MdlVector(BinaryReader reader) throws IOException {
 		this.x = reader.readFloat();
 		this.y = reader.readFloat();
 		this.z = reader.readFloat();
 	}
 
-	MDLVector(float[] array) {
+	MdlVector(float[] array) {
 		this.x = array[0];
 		this.y = array[1];
 		this.z = array[2];
@@ -32,7 +32,7 @@ public class MDLVector {
 	 * @return the X coordinate as a float
 	 */
 	public float getX() {
-		return x;
+		return this.x;
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class MDLVector {
 	 * @return the Y coordinate as a float
 	 */
 	public float getY() {
-		return y;
+		return this.y;
 	}
 
 	/**
@@ -50,12 +50,12 @@ public class MDLVector {
 	 * @return the Z coordinate as a float
 	 */
 	public float getZ() {
-		return z;
+		return this.z;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("MDLVector [x=%s, y=%s, z=%s]", x, y, z);
+		return String.format("MdlVector [x=%s, y=%s, z=%s]", this.x, this.y, this.z);
 	}
 
 }

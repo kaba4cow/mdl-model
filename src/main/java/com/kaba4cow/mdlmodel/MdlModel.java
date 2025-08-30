@@ -10,11 +10,11 @@ import com.kaba4cow.binprocessor.io.BinaryReader;
  * Represents a complete {@code MDL} model file. This is the root class for accessing all model data including geometry,
  * textures, animations, and transformation information.
  */
-public class MDLModel {
+public class MdlModel {
 
-	private final MDLVector scale;
-	private final MDLVector translation;
-	private final MDLVector eyePosition;
+	private final MdlVector scale;
+	private final MdlVector translation;
+	private final MdlVector eyePosition;
 
 	private final float boundingRadius;
 	private final float size;
@@ -26,16 +26,16 @@ public class MDLModel {
 	private final int textureHeight;
 
 	private final int numTextureGroups;
-	private final MDLTextureGroup[] textureGroups;
+	private final MdlTextureGroup[] textureGroups;
 
 	private final int numVertices;
-	private final MDLTextureCoord[] textureCoords;
+	private final MdlTextureCoord[] textureCoords;
 
 	private final int numTriangles;
-	private final MDLTriangle[] triangles;
+	private final MdlTriangle[] triangles;
 
 	private final int numFrameGroups;
-	private final MDLFrameGroup[] frameGroups;
+	private final MdlFrameGroup[] frameGroups;
 
 	/**
 	 * Constructs a new {@code MDLModel} by reading model data from an input stream. Validates the file format identifier
@@ -46,7 +46,7 @@ public class MDLModel {
 	 * @throws IOException              if an I/O error occurs
 	 * @throws IllegalArgumentException if the file identifier is not "IDPO" or version is not 6
 	 */
-	public MDLModel(InputStream input) throws IOException {
+	public MdlModel(InputStream input) throws IOException {
 		try (BinaryReader reader = new BinaryReader(input)) {
 			reader.setOrder(ByteOrder.LITTLE_ENDIAN);
 			String identifier = reader.readStringFixed(4);
@@ -56,10 +56,10 @@ public class MDLModel {
 			if (version != 6)
 				throw new IllegalArgumentException(String.format("Unsupported version: %s", version));
 
-			this.scale = new MDLVector(reader);
-			this.translation = new MDLVector(reader);
+			this.scale = new MdlVector(reader);
+			this.translation = new MdlVector(reader);
 			this.boundingRadius = reader.readFloat();
-			this.eyePosition = new MDLVector(reader);
+			this.eyePosition = new MdlVector(reader);
 
 			this.numTextureGroups = reader.readInt();
 			this.textureWidth = reader.readInt();
@@ -73,45 +73,45 @@ public class MDLModel {
 			this.flags = reader.readInt();
 			this.size = reader.readFloat();
 
-			this.textureGroups = new MDLTextureGroup[this.numTextureGroups];
+			this.textureGroups = new MdlTextureGroup[this.numTextureGroups];
 			for (int i = 0; i < this.numTextureGroups; i++)
-				this.textureGroups[i] = new MDLTextureGroup(this.textureWidth, this.textureHeight, reader);
-			this.textureCoords = new MDLTextureCoord[this.numVertices];
+				this.textureGroups[i] = new MdlTextureGroup(this.textureWidth, this.textureHeight, reader);
+			this.textureCoords = new MdlTextureCoord[this.numVertices];
 			for (int i = 0; i < this.numVertices; i++)
-				this.textureCoords[i] = new MDLTextureCoord(reader);
-			this.triangles = new MDLTriangle[this.numTriangles];
+				this.textureCoords[i] = new MdlTextureCoord(reader);
+			this.triangles = new MdlTriangle[this.numTriangles];
 			for (int i = 0; i < this.numTriangles; i++)
-				this.triangles[i] = new MDLTriangle(reader);
-			this.frameGroups = new MDLFrameGroup[this.numFrameGroups];
+				this.triangles[i] = new MdlTriangle(reader);
+			this.frameGroups = new MdlFrameGroup[this.numFrameGroups];
 			for (int i = 0; i < this.numFrameGroups; i++)
-				this.frameGroups[i] = new MDLFrameGroup(this.numVertices, reader);
+				this.frameGroups[i] = new MdlFrameGroup(this.numVertices, reader);
 		}
 	}
 
 	/**
 	 * Gets the model's scale vector.
 	 * 
-	 * @return the {@link MDLVector} representing scale
+	 * @return the {@link MdlVector} representing scale
 	 */
-	public MDLVector getScale() {
+	public MdlVector getScale() {
 		return this.scale;
 	}
 
 	/**
 	 * Gets the model's translation vector.
 	 * 
-	 * @return the {@link MDLVector} representing translation
+	 * @return the {@link MdlVector} representing translation
 	 */
-	public MDLVector getTranslation() {
+	public MdlVector getTranslation() {
 		return this.translation;
 	}
 
 	/**
 	 * Gets the model's eye position vector.
 	 * 
-	 * @return the {@link MDLVector} representing the eye position
+	 * @return the {@link MdlVector} representing the eye position
 	 */
-	public MDLVector getEyePosition() {
+	public MdlVector getEyePosition() {
 		return this.eyePosition;
 	}
 
@@ -181,9 +181,9 @@ public class MDLModel {
 	/**
 	 * Gets all texture groups in the model.
 	 * 
-	 * @return an array of {@link MDLTextureGroup} objects
+	 * @return an array of {@link MdlTextureGroup} objects
 	 */
-	public MDLTextureGroup[] getTextureGroups() {
+	public MdlTextureGroup[] getTextureGroups() {
 		return this.textureGroups;
 	}
 
@@ -199,9 +199,9 @@ public class MDLModel {
 	/**
 	 * Gets the texture coordinates for all vertices.
 	 * 
-	 * @return an array of {@link MDLTextureCoord} objects mapping vertices to texture coordinates
+	 * @return an array of {@link MdlTextureCoord} objects mapping vertices to texture coordinates
 	 */
-	public MDLTextureCoord[] getTextureCoords() {
+	public MdlTextureCoord[] getTextureCoords() {
 		return this.textureCoords;
 	}
 
@@ -217,9 +217,9 @@ public class MDLModel {
 	/**
 	 * Gets all triangles that make up the model's geometry.
 	 * 
-	 * @return an array of {@link MDLTriangle} objects defining the model's faces
+	 * @return an array of {@link MdlTriangle} objects defining the model's faces
 	 */
-	public MDLTriangle[] getTriangles() {
+	public MdlTriangle[] getTriangles() {
 		return this.triangles;
 	}
 
@@ -235,9 +235,9 @@ public class MDLModel {
 	/**
 	 * Gets all frame groups in the model.
 	 * 
-	 * @return an array of {@link MDLFrameGroup} objects
+	 * @return an array of {@link MdlFrameGroup} objects
 	 */
-	public MDLFrameGroup[] getFrameGroups() {
+	public MdlFrameGroup[] getFrameGroups() {
 		return this.frameGroups;
 	}
 

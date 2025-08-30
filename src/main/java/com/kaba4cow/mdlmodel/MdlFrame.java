@@ -1,6 +1,7 @@
 package com.kaba4cow.mdlmodel;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import com.kaba4cow.binprocessor.io.BinaryReader;
 
@@ -8,20 +9,20 @@ import com.kaba4cow.binprocessor.io.BinaryReader;
  * Represents a single frame of animation in an {@code MDL} model. Each frame contains a bounding box (min/max vertices), a
  * name, and an array of vertices defining the model's geometry for this frame.
  */
-public class MDLFrame {
+public class MdlFrame {
 
-	private final MDLVertex min;
-	private final MDLVertex max;
+	private final MdlVertex min;
+	private final MdlVertex max;
 	private final String name;
-	private final MDLVertex[] vertices;
+	private final MdlVertex[] vertices;
 
-	MDLFrame(int numVertices, BinaryReader reader) throws IOException {
-		this.min = new MDLVertex(reader);
-		this.max = new MDLVertex(reader);
+	MdlFrame(int numVertices, BinaryReader reader) throws IOException {
+		this.min = new MdlVertex(reader);
+		this.max = new MdlVertex(reader);
 		this.name = reader.readStringFixed(16).split("\0")[0];
-		this.vertices = new MDLVertex[numVertices];
+		this.vertices = new MdlVertex[numVertices];
 		for (int i = 0; i < numVertices; i++)
-			this.vertices[i] = new MDLVertex(reader);
+			this.vertices[i] = new MdlVertex(reader);
 	}
 
 	/**
@@ -29,7 +30,7 @@ public class MDLFrame {
 	 * 
 	 * @return the vertex representing the minimum bounds
 	 */
-	public MDLVertex getMin() {
+	public MdlVertex getMin() {
 		return this.min;
 	}
 
@@ -38,7 +39,7 @@ public class MDLFrame {
 	 * 
 	 * @return the vertex representing the maximum bounds
 	 */
-	public MDLVertex getMax() {
+	public MdlVertex getMax() {
 		return this.max;
 	}
 
@@ -54,15 +55,15 @@ public class MDLFrame {
 	/**
 	 * Gets the array of vertices that define this frame's geometry.
 	 * 
-	 * @return an array of {@link MDLVertex} objects
+	 * @return an array of {@link MdlVertex} objects
 	 */
-	public MDLVertex[] getVertices() {
+	public MdlVertex[] getVertices() {
 		return this.vertices;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("MDLFrame [min=%s, max=%s, name=%s]", this.min, this.max, this.name);
+		return String.format("MdlFrame [min=%s, max=%s, name=%s, vertices=%s]", this.min, this.max, this.name, Arrays.toString(this.vertices));
 	}
 
 }
