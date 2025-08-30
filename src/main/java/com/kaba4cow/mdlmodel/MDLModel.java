@@ -49,7 +49,7 @@ public class MDLModel {
 	public MDLModel(InputStream input) throws IOException {
 		try (BinaryReader reader = new BinaryReader(input)) {
 			reader.setOrder(ByteOrder.LITTLE_ENDIAN);
-			String identifier = reader.readString(4);
+			String identifier = reader.readStringFixed(4);
 			if (!"IDPO".equals(identifier))
 				throw new IllegalArgumentException(String.format("Unsupported identifier: %s", identifier));
 			int version = reader.readInt();
@@ -73,18 +73,18 @@ public class MDLModel {
 			this.flags = reader.readInt();
 			this.size = reader.readFloat();
 
-			this.textureGroups = new MDLTextureGroup[numTextureGroups];
-			for (int i = 0; i < numTextureGroups; i++)
-				this.textureGroups[i] = new MDLTextureGroup(textureWidth, textureHeight, reader);
-			this.textureCoords = new MDLTextureCoord[numVertices];
-			for (int i = 0; i < numVertices; i++)
+			this.textureGroups = new MDLTextureGroup[this.numTextureGroups];
+			for (int i = 0; i < this.numTextureGroups; i++)
+				this.textureGroups[i] = new MDLTextureGroup(this.textureWidth, this.textureHeight, reader);
+			this.textureCoords = new MDLTextureCoord[this.numVertices];
+			for (int i = 0; i < this.numVertices; i++)
 				this.textureCoords[i] = new MDLTextureCoord(reader);
-			this.triangles = new MDLTriangle[numTriangles];
-			for (int i = 0; i < numTriangles; i++)
+			this.triangles = new MDLTriangle[this.numTriangles];
+			for (int i = 0; i < this.numTriangles; i++)
 				this.triangles[i] = new MDLTriangle(reader);
-			this.frameGroups = new MDLFrameGroup[numFrameGroups];
-			for (int i = 0; i < numFrameGroups; i++)
-				this.frameGroups[i] = new MDLFrameGroup(numVertices, reader);
+			this.frameGroups = new MDLFrameGroup[this.numFrameGroups];
+			for (int i = 0; i < this.numFrameGroups; i++)
+				this.frameGroups[i] = new MDLFrameGroup(this.numVertices, reader);
 		}
 	}
 
@@ -94,7 +94,7 @@ public class MDLModel {
 	 * @return the {@link MDLVector} representing scale
 	 */
 	public MDLVector getScale() {
-		return scale;
+		return this.scale;
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class MDLModel {
 	 * @return the {@link MDLVector} representing translation
 	 */
 	public MDLVector getTranslation() {
-		return translation;
+		return this.translation;
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class MDLModel {
 	 * @return the {@link MDLVector} representing the eye position
 	 */
 	public MDLVector getEyePosition() {
-		return eyePosition;
+		return this.eyePosition;
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class MDLModel {
 	 * @return the bounding radius
 	 */
 	public float getBoundingRadius() {
-		return boundingRadius;
+		return this.boundingRadius;
 	}
 
 	/**
@@ -130,7 +130,7 @@ public class MDLModel {
 	 * @return the size
 	 */
 	public float getSize() {
-		return size;
+		return this.size;
 	}
 
 	/**
@@ -139,7 +139,7 @@ public class MDLModel {
 	 * @return the sync type
 	 */
 	public int getSyncType() {
-		return syncType;
+		return this.syncType;
 	}
 
 	/**
@@ -148,7 +148,7 @@ public class MDLModel {
 	 * @return the flags
 	 */
 	public int getFlags() {
-		return flags;
+		return this.flags;
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class MDLModel {
 	 * @return the texture width
 	 */
 	public int getTextureWidth() {
-		return textureWidth;
+		return this.textureWidth;
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class MDLModel {
 	 * @return the texture height
 	 */
 	public int getTextureHeight() {
-		return textureHeight;
+		return this.textureHeight;
 	}
 
 	/**
@@ -175,7 +175,7 @@ public class MDLModel {
 	 * @return the number of texture groups
 	 */
 	public int getNumTextureGroups() {
-		return numTextureGroups;
+		return this.numTextureGroups;
 	}
 
 	/**
@@ -184,7 +184,7 @@ public class MDLModel {
 	 * @return an array of {@link MDLTextureGroup} objects
 	 */
 	public MDLTextureGroup[] getTextureGroups() {
-		return textureGroups;
+		return this.textureGroups;
 	}
 
 	/**
@@ -193,7 +193,7 @@ public class MDLModel {
 	 * @return the number of vertices
 	 */
 	public int getNumVertices() {
-		return numVertices;
+		return this.numVertices;
 	}
 
 	/**
@@ -202,7 +202,7 @@ public class MDLModel {
 	 * @return an array of {@link MDLTextureCoord} objects mapping vertices to texture coordinates
 	 */
 	public MDLTextureCoord[] getTextureCoords() {
-		return textureCoords;
+		return this.textureCoords;
 	}
 
 	/**
@@ -211,7 +211,7 @@ public class MDLModel {
 	 * @return the number of triangles
 	 */
 	public int getNumTriangles() {
-		return numTriangles;
+		return this.numTriangles;
 	}
 
 	/**
@@ -220,7 +220,7 @@ public class MDLModel {
 	 * @return an array of {@link MDLTriangle} objects defining the model's faces
 	 */
 	public MDLTriangle[] getTriangles() {
-		return triangles;
+		return this.triangles;
 	}
 
 	/**
@@ -229,7 +229,7 @@ public class MDLModel {
 	 * @return the number of frame groups
 	 */
 	public int getNumFrameGroups() {
-		return numFrameGroups;
+		return this.numFrameGroups;
 	}
 
 	/**
@@ -238,7 +238,7 @@ public class MDLModel {
 	 * @return an array of {@link MDLFrameGroup} objects
 	 */
 	public MDLFrameGroup[] getFrameGroups() {
-		return frameGroups;
+		return this.frameGroups;
 	}
 
 }

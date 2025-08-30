@@ -18,7 +18,7 @@ public class MDLFrame {
 	MDLFrame(int numVertices, BinaryReader reader) throws IOException {
 		this.min = new MDLVertex(reader);
 		this.max = new MDLVertex(reader);
-		this.name = reader.readString(16).split("\0")[0];
+		this.name = reader.readStringFixed(16).split("\0")[0];
 		this.vertices = new MDLVertex[numVertices];
 		for (int i = 0; i < numVertices; i++)
 			this.vertices[i] = new MDLVertex(reader);
@@ -30,7 +30,7 @@ public class MDLFrame {
 	 * @return the vertex representing the minimum bounds
 	 */
 	public MDLVertex getMin() {
-		return min;
+		return this.min;
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class MDLFrame {
 	 * @return the vertex representing the maximum bounds
 	 */
 	public MDLVertex getMax() {
-		return max;
+		return this.max;
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class MDLFrame {
 	 * @return the frame name as a {@link String}
 	 */
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	/**
@@ -57,12 +57,12 @@ public class MDLFrame {
 	 * @return an array of {@link MDLVertex} objects
 	 */
 	public MDLVertex[] getVertices() {
-		return vertices;
+		return this.vertices;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("MDLFrame [min=%s, max=%s, name=%s]", min, max, name);
+		return String.format("MDLFrame [min=%s, max=%s, name=%s]", this.min, this.max, this.name);
 	}
 
 }
